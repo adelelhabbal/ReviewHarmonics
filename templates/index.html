@@ -15,6 +15,8 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="static\css\styles.css" rel="stylesheet" />
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -66,17 +68,17 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-xl-7">
 
-                        <form id="main">
+                        <form id="mainForm">
                             <!-- Name input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="keyword" type="text" placeholder="Steak" data-sb-validations="required" required>
-                                <label for="name">Keyword</label>
+                                <input class="form-control" id="keyword" name="keyword" type="text" placeholder="Steak" data-sb-validations="required" required>
+                                <label for="keyword">Keyword</label>
                                 <div class="invalid-feedback" data-sb-feedback="name:required">A keyword is required.</div>
                             </div>
                             <!-- Name input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="location" type="text" placeholder="Regina" data-sb-validations="required" required>
-                                <label for="name">Location</label>
+                                <input class="form-control" id="location" name="location" type="text" placeholder="Regina" data-sb-validations="required" required>
+                                <label for="location">Location</label>
                                 <div class="invalid-feedback" data-sb-feedback="name:required">A location is required.</div>
                             </div>
                             <!-- Submit success message-->
@@ -96,6 +98,28 @@
                             <!-- Submit Button-->
                             <button class="btn btn-primary btn-xl enabled" id="submitButton" type="submit">Submit</button>
                         </form>
+                        <p class="lead" id="result"></p>
+                        <script>
+                            function submitForm() {
+                                var keyword = $('#keyword').val();
+                                var location = $('#location').val();
+                        
+                                $.post('/process_input', { keyword: keyword, location: location })
+                                    .done(function(response) {
+                                        $('#result').text(response.result);
+                                    })
+                                    .fail(function(error) {
+                                        console.log(error.responseText);
+                                    });
+                            }
+                        
+                            $(document).ready(function() {
+                                $('#mainForm').submit(function(event) {
+                                    event.preventDefault();
+                                    submitForm();
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -314,6 +338,6 @@
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <!--<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>-->
     </body>
 </html>
