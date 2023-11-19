@@ -153,7 +153,7 @@ def process_text():
         # Print the top 10 most important words for sentiment analysis
         output_string.append("<h3>Top 10 most important words according to the natural language processing AI:</h3>")
         output_string.append("<table style='border-collapse: collapse;' border='1'>")
-        output_string.append("<tr><th style='border: 1px solid #ddd; padding: 8px;'>Word</th><th style='border: 1px solid #ddd; padding: 8px;'>Importance Score</th><th style='border: 1px solid #ddd; padding: 8px;'>General public sentiment towards this term</th></tr>")
+        output_string.append("<tr><th style='border: 1px solid #ddd; padding: 8px;'>Word</th><th style='border: 1px solid #ddd; padding: 8px;'>Importance Score</th><th style='border: 1px solid #ddd; padding: 8px;'>Public experience at restaurants analyzed</th></tr>")
 
         for word, importance, sentiment in zip(most_important_words[-10:][::-1], importance_scores[-10:][::-1], word_sentiments[-10:][::-1]):
             output_string.append("<tr>")
