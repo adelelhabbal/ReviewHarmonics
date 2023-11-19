@@ -20,6 +20,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+
+    #Added here for faster response later
+    nltk.download('stopwords')
+    nltk.download('wordnet')
+    nltk.download('punkt')
+    #
     return render_template('index.html')
 
 @app.route('/process_input', methods=['POST'])
@@ -76,9 +82,11 @@ def process_text():
         df = pd.DataFrame(reviews_list)
 
         # Data preprocessing
+        """ DONE ON LANDING PAGE FOR A FASTER RESPONSE
         nltk.download('stopwords')
         nltk.download('wordnet')
         nltk.download('punkt')
+        """
         stop_words = set(stopwords.words('english'))
         # Add your custom stop words to the standard set
         custom_stop_words = ["really","went", "sure","definitely","got","back","everything","always","first","second","third","omg","Absolutely","nice","much","make","store","one","two","three","four","five","six","seven","eight","nine","ten","1","2","3","4","5","6","7","8","9","10","ok","okay","friend","well","go", "awesome", "Accordingly", "Actually", "Admirably", "Allegedly", "Almost", "Already", "Always", "Amazingly", "Approximately", "Arguably", "As", "As a result", "As usual", "Basically", "Beautifully", "Before", "Clearly", "Completely", "Consequently", "Constantly", "Definitely", "Deliberately", "Doubtfully", "Eagerly", "Easily", "Effectively", "Emphatically", "Entirely", "Equally", "Especially", "Essentially", "Eventually", "Exactly", "Extremely", "Famously", "Finally", "Financially", "Fortunately", "Frankly", "Freely", "Frequently", "Generally", "Generally speaking", "Gently", "Gradually", "Happily", "Hardly", "Hence", "Honestly", "Hopefully", "Immediately", "In addition", "In conclusion", "In fact", "In general", "In other words", "In particular", "In reality", "In short", "In the meantime", "In this case", "In this situation", "In truth", "Increasingly", "Indeed", "Interestingly", "Intimately", "Invariably", "Just", "Kindly", "Largely", "Later", "Likely", "Literally", "Logically", "Long", "Mainly", "Meanwhile", "Merely", "Most importantly", "Naturally", "Nearly", "Nevertheless", "Next", "Normally", "Not", "Notably", "Nowadays", "Obviously", "Occasionally", "Often", "On the contrary", "On the other hand", "Once", "Only", "Openly", "Originally", "Overall", "Particularly", "Perfectly", "Personally", "Possibly", "Practically", "Precisely", "Previously", "Probably", "Promptly", "Properly", "Quickly", "Quite", "Rarely", "Rather", "Readily", "Realistically", "Recently", "Regardless", "Regularly", "Relatively", "Remarkably", "Repeatedly", "Respectively", "Right", "Roughly", "Sadly", "Satisfactorily", "Second", "Seemingly", "Seriously", "Shortly", "Significantly", "Similarly", "Simultaneously", "Simply", "Slightly", "So", "Specifically", "Strictly", "Suddenly", "Supposedly", "Surely", "Temporarily", "Thankfully", "Thereafter", "Therefore", "Throughout", "Today", "Tomorrow", "Too", "Totally", "Truly", "Typically", "Ultimately", "Undoubtedly", "Unfortunately", "Usually", "Utterly", "Very", "Virtually", "Visibly", "Well", "Whatever", "Whenever", "Where", "Wherever", "Whether","great", "good", "bad", "terrible", "excellent", "amazing", "wonderful", "horrible", "awful", "fantastic", "poor", "love", "hate", "like", "dislike", "experience", "place", "restaurant", "eat", "food", "dine", "order", "meal", "drink", "delicious", "tasty", "yummy", "taste", "guest", "patron", "customer", "client", "kitchen", "dish", "spoon", "fork", "knife", "glass", "beverage", "appetite", "hungry", "thirsty", "full", "empty", "bill", "check", "tip", "menu", "special", "recommend", "recommendation", "suggestion", "complaint", "critique", "review", "rating", "star", "visit", "try", "return", "come back", "visit", "guest", "visitor", "long", "address", "city", "town", "place", "restaurant", "establishment", "eatery", "bistro", "cafe", "diner", "joint", "pub", "grill", "steakhouse", "pizzeria", "bakery", "cafeteria", "deli", "food court", "gastropub", "tavern", "screaming", "crying", "babysitter", "accommodate", "toilet", "sink", "mirror", "soap", "distance", "mask", "vaccine", "covid", "pandemic", "coronavirus", "policy", "guideline", "requirement", "mandate", "regulation", "government", "protocol", "restriction", "limitation"]
