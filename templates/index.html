@@ -98,28 +98,48 @@
                             <!-- Submit Button-->
                             <button class="btn btn-primary btn-xl enabled" id="submitButton" type="submit">Submit</button>
                         </form>
-                        <p class="lead" id="result"></p>
+                        <div style="margin-top: 5rem;" class="lead" id="result"></div>
                         <script>
-                            function submitForm() {
-                                var keyword = $('#keyword').val();
-                                var location = $('#location').val();
+                            document.getElementById('mainForm').addEventListener('submit', function(event) {
+                                // Prevent the default form submission behavior
+                                event.preventDefault();
                         
-                                $.post('/process_input', { keyword: keyword, location: location })
-                                    .done(function(response) {
-                                        $('#result').text(response.result);
-                                    })
-                                    .fail(function(error) {
-                                        console.log(error.responseText);
-                                    });
-                            }
+                                // Get values from input fields
+                                var keyword = document.getElementById('keyword').value;
+                                var location = document.getElementById('location').value;
                         
-                            $(document).ready(function() {
-                                $('#mainForm').submit(function(event) {
-                                    event.preventDefault();
-                                    submitForm();
+                                // Send a POST request to the Flask route
+                                fetch('/process_input', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded',
+                                    },
+                                    body: new URLSearchParams({
+                                        'keyword': keyword,
+                                        'location': location
+                                    }),
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    // Clear previous results
+                                    document.getElementById('result').textContent = '';
+                        
+                                    // Create a result string
+                                    var resultString = data.result;
+                        
+                                    // Create a new div element
+                                    var resultDiv = document.createElement('div');
+                                    resultDiv.innerHTML = resultString; // Use innerHTML to interpret HTML content
+                        
+                                    // Append the div under the form
+                                    document.getElementById('result').appendChild(resultDiv);
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    // Handle the error, e.g., display an error message to the user
                                 });
                             });
-                        </script>
+                        </script>                                              
                     </div>
                 </div>
             </div>
