@@ -67,6 +67,24 @@ def process_text():
 
         output_string = []
 
+        # Add the scale information to the output
+        output_string.append("<div style='text-align: left'><h3 style='text-align: center; padding-bottom:1.5rem'>Here's a simplified scale to help you interpret these scores:</h3>")
+        output_string.append("<p style='font-weight:bold'>Positive Importance Score:</p>")
+        output_string.append("<ul>")
+        output_string.append("<li>A high positive score indicates that the word is strongly associated with positive sentiment.</li>")
+        output_string.append("<li>The higher the positive score, the more influential the word is in suggesting a positive sentiment in the reviews.</li>")
+        output_string.append("</ul>")
+        output_string.append("<p style='font-weight:bold'>Negative Importance Score:</p>")
+        output_string.append("<ul>")
+        output_string.append("<li>A high negative score indicates that the word is strongly associated with negative sentiment.</li>")
+        output_string.append("<li>The higher the negative score, the more influential the word is in suggesting a negative sentiment in the reviews.</li>")
+        output_string.append("</ul>")
+        output_string.append("<p style='font-weight:bold'>Neutral Importance Score:</p>")
+        output_string.append("<ul>")
+        output_string.append("<li>A score close to zero suggests that the word has a balanced or neutral impact on sentiment.</li>")
+        output_string.append("<li>Words with scores around zero may not strongly contribute to either positive or negative sentiment.</li>")
+        output_string.append("</ul></div>")
+
         for place_name, reviews_list in reviews_dict.items():
             df = pd.DataFrame(reviews_list)
 
@@ -173,6 +191,7 @@ def process_text():
             word_sentiments = [
                 "positive" if prob_diff > 0 else ("negative" if prob_diff < 0 else "neutral") for prob_diff in
                 log_probability_diff]
+            
 
             # Print the top 5 most important words for sentiment analysis for each restaurant
             output_string.append(f"<h3 style='padding-bottom: 1.5rem;padding-top: 1.5rem'>Top 5 most important words for {place_name}:</h3>")
