@@ -68,7 +68,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-xl-7">
 
-                        <form id="mainForm">
+                        <form id="mainForm" style="display: grid;">
                             <!-- Name input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control" id="keyword" name="keyword" type="text" placeholder="Steak" data-sb-validations="required" required>
@@ -98,7 +98,7 @@
                             <!-- Submit Button-->
                             <button class="btn btn-primary btn-xl enabled" id="submitButton" type="submit">Submit</button>
                         </form>
-                        <div style="margin-top: 5rem; text-align: center; display: grid;" class="lead" id="result"></div>
+                        <div style="margin-top: 3rem; text-align: center; display: grid;" class="lead" id="result"></div>
                         <script>
                             document.getElementById('mainForm').addEventListener('submit', function(event) {
                                 // Prevent the default form submission behavior
