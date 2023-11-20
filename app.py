@@ -179,14 +179,13 @@ def process_text():
             output_string.append(
                 "<table style='display: inline-block; border-collapse: collapse; margin-right: 20px;' border='1'>")
             output_string.append(
-                "<tr><th style='border: 1px solid #ddd; padding: 8px;'>Word</th><th style='border: 1px solid #ddd; padding: 8px;'>Importance Score</th><th style='border: 1px solid #ddd; padding: 8px;'>Sentiment</th></tr>")
+                "<tr><th style='border: 1px solid #ddd; padding: 8px;'>Word</th><th style='border: 1px solid #ddd; padding: 8px;'>Importance Score</th></tr>")
 
-            for word, importance, sentiment in zip(most_important_words[-5:][::-1], importance_scores[-5:][::-1],
-                                                   word_sentiments[-5:][::-1]):
+            for word, importance in zip(most_important_words[-5:][::-1], importance_scores[-5:][::-1]):
                 output_string.append("<tr>")
                 output_string.append(f"<td style='border: 1px solid #ddd; padding: 8px;'>{word}</td>")
                 output_string.append(f"<td style='border: 1px solid #ddd; padding: 8px;'>{importance:.2f}</td>")
-                output_string.append(f"<td style='border: 1px solid #ddd; padding: 8px;'>{sentiment}</td>")
+                #output_string.append(f"<td style='border: 1px solid #ddd; padding: 8px;'>{sentiment}</td>")
                 output_string.append("</tr>")
 
             output_string.append("</table>")
