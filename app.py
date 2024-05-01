@@ -6,6 +6,7 @@ import googlemaps
 import pandas as pd
 import numpy as np
 import nltk
+import os
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
@@ -32,7 +33,7 @@ def process_text():
         location = request.form.get('location')
 
         # Google API key.
-        api_key = 'AIzaSyB8D6wxDpDb5-Hhd6CFfR75TS03J6qkeoE'
+        api_key = os.getenv('API_KEY')
 
         # Initialize the Google Maps client.
         gmaps = googlemaps.Client(key=api_key)
